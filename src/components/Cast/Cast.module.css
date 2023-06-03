@@ -1,0 +1,14 @@
+.imgWrapperCast {
+  width: 150px;
+}
+.imgWrapperCast img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
