@@ -1,6 +1,6 @@
 import { Container } from 'components/App.styled';
 import Loader from 'components/Loader/Loader';
-import Trending from 'components/Trending/Trending';
+import MovieList from '../components/MovieList/MovieList';
 import { useEffect, useState } from 'react';
 import { fetchTrending } from 'services/moviesApi';
 
@@ -18,7 +18,7 @@ const Home = () => {
   }, []);
   return (
     <Container>
-      <Trending movies={movies} />
+      <MovieList movies={movies} search={false} />
       {isLoading && <Loader />}
     </Container>
   );

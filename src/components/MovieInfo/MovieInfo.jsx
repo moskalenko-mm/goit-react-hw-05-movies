@@ -32,7 +32,8 @@ const MovieInfo = ({ movie }) => {
         </div>
         <div className={css.infoWrapper}>
           <h2>
-            {title ? title : name} ({releaseYear.getFullYear()})
+            {title ? title : name} (
+            {releaseYear === '????' ? releaseYear : releaseYear.getFullYear()})
           </h2>
           <p>User Score: {Math.ceil(vote_average * 10)}%</p>
           <h3>Опис</h3>

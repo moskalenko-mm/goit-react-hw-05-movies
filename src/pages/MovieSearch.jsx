@@ -1,28 +1,30 @@
 import { Container } from 'components/App.styled';
 import Loader from 'components/Loader/Loader';
-import SearchList from 'components/SearchList/SearchList';
+import MovieList from 'components/MovieList/MovieList';
 import Searchbar from 'components/Searchbar/Searchbar';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { fetchMovies } from 'services/moviesApi';
 
 const MovieSearch = () => {
   const [movies, setMovies] = useState([]);
-  const [userRequest, setUserRequest] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams('');
 
   useEffect(() => {
-    if (userRequest === '') return;
+    const query = searchParams.get('query');
+    if (query === '') return;
     setIsLoading(true);
-    fetchMovies(userRequest)
+    fetchMovies(query)
       .then(setMovies)
       .catch(error => {
         alert(error);
       })
       .finally(() => setIsLoading(false));
-  }, [userRequest]);
+  }, [searchParams]);
 
-  const handleSubmit = userRequest => {
-    setUserRequest(userRequest);
+  const handleSubmit = query => {
+    setSearchParams({ query });
     setMovies([]);
   };
 
@@ -30,7 +32,7 @@ const MovieSearch = () => {
     <Container>
       <Searchbar handleSubmit={handleSubmit} />
       {isLoading && <Loader />}
-      <SearchList movies={movies} />
+      <MovieList movies={movies} search={true} />
     </Container>
   );
 };
